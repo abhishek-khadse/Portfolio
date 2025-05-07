@@ -1,4 +1,4 @@
-import { useState, useEffect, forwardRef, useRef } from 'react';
+import React, { useState, useEffect, forwardRef, useRef } from 'react';
 import { FiMessageSquare, FiX } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
@@ -45,33 +45,30 @@ const ChatWidget = forwardRef<HTMLDivElement, ChatWidgetProps>((props, ref) => {
     if (!input.trim()) return;
 
     // Add user message
-    setMessages(prev => [...prev, { role: 'user', content: input }]);
+    const userMessage: Message = { role: 'user', content: input };
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [...messages, { role: 'user', content: input }]
-        })
-      });
-
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      setMessages(prev => [...prev, { role: 'assistant', content: data.content } as Message]);
+      // Import the chat function directly
+      const { chat } = await import('../lib/chat');
+      
+      // Call our local mock chat function
+      const currentMessages = [...messages, userMessage];
+      const responseContent = await chat(currentMessages);
+      
+      // Add assistant response to messages
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: responseContent || 'I\'m not sure how to respond to that.'
+      }]);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Chat error:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.'
-      } as Message]);
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -100,43 +97,44 @@ const ChatWidget = forwardRef<HTMLDivElement, ChatWidgetProps>((props, ref) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-96 max-h-[80vh] overflow-hidden ml-auto"
+        className="bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg w-96 max-h-[80vh] overflow-hidden ml-auto border border-gray-300 dark:border-gray-700"
+        ref={internalRef}
       >
-        <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold">AI Assistant</h3>
-          <button onClick={toggleChat} className="text-gray-500 hover:text-gray-700">
+        <div className="flex justify-between items-center p-4 border-b border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">AI Assistant</h3>
+          <button onClick={toggleChat} className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
             <FiX size={20} />
           </button>
         </div>
 
-        <div className="h-[calc(100%-120px)] overflow-y-auto p-4">
+        <div className="h-[calc(100%-130px)] overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`mb-4 p-3 rounded-lg ${
+              className={`mb-4 p-3 rounded-lg max-w-[80%] shadow-sm ${
                 message.role === 'user' 
-                  ? 'bg-blue-100 dark:bg-blue-900 ml-auto' 
-                  : 'bg-gray-100 dark:bg-gray-700'
+                  ? 'bg-blue-600 text-white ml-auto' 
+                  : 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100'
               }`}
             >
-              {message.content}
+              <p className="break-words whitespace-normal text-sm">{message.content}</p>
             </div>
           ))}
         </div>
 
-        <form onSubmit={handleSubmit} className="flex gap-2 p-4 border-t border-gray-200 dark:border-gray-700">
+        <form onSubmit={handleSubmit} className="p-3 border-t border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
           >
             {isLoading ? (
               <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
