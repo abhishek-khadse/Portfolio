@@ -9,7 +9,7 @@ import ChatWidget from './components/ChatWidget';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Projects = lazy(() => import('./pages/Projects'));
-const Research = lazy(() => import('./pages/Research'));
+const Achievements = lazy(() => import('./pages/Achievements'));
 const Resume = lazy(() => import('./pages/Resume'));
 const Contact = lazy(() => import('./pages/Contact'));
 
@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/research" element={<Research />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

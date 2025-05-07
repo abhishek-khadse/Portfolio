@@ -64,6 +64,7 @@ export default {
       animation: {
         glitch: 'glitch 1s linear infinite',
         pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        skillBar: 'skillBar 1s ease-in-out forwards',
       },
       keyframes: {
         glitch: {
@@ -73,6 +74,10 @@ export default {
           '60%': { transform: 'translate(2px, 2px)' },
           '80%': { transform: 'translate(2px, -2px)' },
           '100%': { transform: 'translate(0)' },
+        },
+        skillBar: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' }
         },
       },
     },

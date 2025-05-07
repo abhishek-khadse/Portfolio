@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary-950 dark:text-white">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Mumbai, India</p>
+                    <p className="text-gray-600 dark:text-gray-300">Pune, India</p>
                   </div>
                 </div>
                 
@@ -43,10 +43,10 @@ const Contact: React.FC = () => {
                   <div>
                     <h4 className="font-semibold text-primary-950 dark:text-white">Email</h4>
                     <a 
-                      href="mailto:contact@example.com"
+                      href="mailto:abhishekkhadse289@gmail.com"
                       className="text-gray-600 dark:text-gray-300 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
                     >
-                      contact@example.com
+                      abhishekkhadse289@gmail.com
                     </a>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary-950 dark:text-white">Phone</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Available upon request</p>
+                    <p className="text-gray-600 dark:text-gray-300"></p>
                   </div>
                 </div>
                 
@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <h3 className="text-2xl font-bold mb-6 text-primary-950 dark:text-white">Send Me a Message</h3>
+              <h3 >Send Me a Message</h3>
               <ContactForm />
             </motion.div>
           </div>

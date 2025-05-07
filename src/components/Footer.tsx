@@ -12,14 +12,11 @@ const Footer: React.FC = () => {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               © {currentYear} Abhishek Khadse. All rights reserved.
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              Designed & Built with React + TypeScript + Tailwind CSS
-            </p>
           </div>
           
           <div className="flex space-x-6">
             <a 
-              href="https://github.com/" 
+              href="https://github.com/abhishek-khadse" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
@@ -28,7 +25,7 @@ const Footer: React.FC = () => {
               <GitHub className="w-5 h-5" />
             </a>
             <a 
-              href="https://linkedin.com/in/" 
+              href="https://www.linkedin.com/in/abhishek-khadse45/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
@@ -37,16 +34,7 @@ const Footer: React.FC = () => {
               <Linkedin className="w-5 h-5" />
             </a>
             <a 
-              href="https://twitter.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a 
-              href="mailto:contact@example.com" 
+              href="mailto:abhishekkhadse289@gmail.com" 
               className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
               aria-label="Email"
             >

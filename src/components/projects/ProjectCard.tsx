@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ChevronRight } from 'lucide-react';
-import ProjectModal from './ProjectModal';
+import { Github, ExternalLink } from 'lucide-react';
 
 export interface Project {
   id: number;
@@ -21,87 +20,74 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const statusColors = {
-    completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    ongoing: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-    upcoming: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  };
-
   return (
-    <>
-      <motion.div
-        className="bg-white dark:bg-dark-900 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-        whileHover={{ y: -5 }}
-        transition={{ type: "spring", stiffness: 300, damping: 10 }}
-      >
-        <div className="relative h-48 overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-          />
-          <div className="absolute top-2 right-2">
-            <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${statusColors[project.status]}`}>
-              {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-            </span>
-          </div>
+    <motion.div
+      className="bg-white dark:bg-dark-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="relative h-40 overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute top-3 right-3">
+          <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
+            project.status === 'completed' ? 'bg-green-100 text-green-800' :
+            project.status === 'ongoing' ? 'bg-blue-100 text-blue-800' :
+            'bg-yellow-100 text-yellow-800'
+          }`}>
+            {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+          </span>
         </div>
-        <div className="p-5">
-          <h3 className="text-xl font-bold mb-2 text-primary-950 dark:text-white">{project.title}</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{project.description}</p>
-          
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.technologies.map((tech, index) => (
-              <span key={`${tech}-${index}`} className="text-xs bg-gray-100 dark:bg-dark-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded-md font-mono">
-                {tech}
-              </span>
-            ))}
-          </div>
-          
-          <div className="flex justify-between items-center">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="text-accent-500 hover:text-accent-400 font-medium flex items-center gap-1 transition-colors"
+      </div>
+
+      <div className="p-4 flex-grow flex flex-col">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+          {project.title}
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {project.technologies.map((tech, index) => (
+            <span
+              key={index}
+              className="px-2 py-0.5 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs"
             >
-              View Details <ChevronRight className="w-4 h-4" />
-            </button>
-            
-            <div className="flex space-x-3">
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
-                  aria-label="GitHub Repository"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-500 transition-colors"
-                  aria-label="Live Demo"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </a>
-              )}
-            </div>
-          </div>
+              {tech}
+            </span>
+          ))}
         </div>
-      </motion.div>
-      
-      <ProjectModal 
-        project={project} 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
-    </>
+
+        <div className="flex gap-3 mt-auto">
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:text-accent-500 dark:hover:text-accent-500 transition-colors text-sm"
+            >
+              <Github className="w-4 h-4" />
+              <span>Code</span>
+            </a>
+          )}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:text-accent-500 dark:hover:text-accent-500 transition-colors text-sm"
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>Live Demo</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
   );
 };
 

@@ -6,11 +6,14 @@ import { useInView } from 'react-intersection-observer';
 import SectionTitle from '../common/SectionTitle';
 import ProjectCard, { Project } from './ProjectCard';
 
+// Import project images
+import { SageShieldImg, MalwareSageImg, SageGuardImg, SageEyeImg } from './projectImages';
+
 interface ProjectsSectionProps {
-  showAll: boolean;
+  showAll?: boolean;
 }
 
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({ showAll }) => {
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({ showAll = false }) => {
   const navigate = useNavigate();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -22,77 +25,71 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ showAll }) => {
       id: 1,
       title: 'Sage Shield',
       description: 'A real-time DDoS detection and prevention system using Python and ML for smarter traffic filtering and threat response.',
-      image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: SageShieldImg,
       technologies: ['Python', 'TensorFlow', 'Flask', 'Docker'],
-      github: 'https://github.com/',
-      demo: 'https://example.com',
+      github: 'https://github.com/yourusername/sage-shield',
+      demo: 'https://sage-shield-demo.com',
       status: 'completed',
-      details: 'Sage Shield is an advanced DDoS detection and prevention system that leverages machine learning algorithms to identify and mitigate distributed denial of service attacks in real-time. The system analyzes network traffic patterns to distinguish between legitimate user traffic and malicious attack traffic, allowing for precise filtering and minimizing false positives.',
+      details: 'Sage Shield is an advanced DDoS detection and prevention system that leverages machine learning algorithms to identify and mitigate distributed denial of service attacks in real-time.',
       features: [
-        'Real-time traffic analysis and anomaly detection',
-        'ML-based classification of attack patterns',
-        'Adaptive rate limiting and traffic filtering',
-        'Detailed attack visualization and reporting',
-        'API integration with network infrastructure',
-        'Automated mitigation response workflows'
+        'Real-time traffic analysis',
+        'ML-based attack detection',
+        'Automated mitigation',
+        'Detailed reporting'
       ]
     },
     {
       id: 2,
       title: 'Malware Sage',
       description: 'A malware reverse engineering toolkit with automation support to analyze and understand malware behavior more efficiently.',
-      image: 'https://images.pexels.com/photos/5380651/pexels-photo-5380651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: MalwareSageImg,
       technologies: ['Python', 'YARA', 'Assembly', 'Django'],
-      github: 'https://github.com/',
+      github: 'https://github.com/yourusername/malware-sage',
+      demo: 'https://malware-sage-demo.com',
       status: 'completed',
-      details: 'Malware Sage is a comprehensive toolkit designed to streamline the process of malware analysis and reverse engineering. It provides automated tools for static and dynamic analysis, helping security researchers understand malware behavior, extract indicators of compromise (IoCs), and develop effective detection signatures.',
+      details: 'Malware Sage is a comprehensive toolkit designed to streamline the process of malware analysis and reverse engineering.',
       features: [
-        'Automated unpacking and deobfuscation of malware samples',
-        'Static code analysis with pattern recognition',
-        'Sandbox-based behavioral analysis',
-        'Network traffic capture and analysis',
-        'YARA rule generation from identified patterns',
-        'Comprehensive reporting of malware capabilities'
+        'Automated analysis',
+        'Pattern recognition',
+        'Behavioral analysis',
+        'Report generation'
       ]
     },
     {
       id: 3,
       title: 'Sage Guard',
       description: 'A road accident detection and threat intelligence system with real-time monitoring and alert capabilities.',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: SageGuardImg,
       technologies: ['Python', 'OpenCV', 'TensorFlow', 'React'],
-      github: 'https://github.com/',
+      github: 'https://github.com/yourusername/sage-guard',
+      demo: 'https://sage-guard-demo.com',
       status: 'ongoing',
-      details: 'Sage Guard is an innovative system that combines computer vision and machine learning to detect road accidents and potential safety threats in real-time. By analyzing video feeds from traffic cameras, the system can automatically identify incidents, assess their severity, and dispatch appropriate emergency services.',
+      details: 'Sage Guard is an innovative system that combines computer vision and machine learning to detect road accidents and potential safety threats in real-time.',
       features: [
-        'Real-time video analysis from multiple camera feeds',
-        'AI-powered accident detection and classification',
-        'Automated emergency response coordination',
-        'Traffic flow optimization during incidents',
-        'Historical data analysis for identifying high-risk areas',
-        'Mobile app for emergency personnel with real-time updates'
+        'Real-time monitoring',
+        'Accident detection',
+        'Emergency alerts',
+        'Traffic analysis'
       ]
     },
     {
       id: 4,
       title: 'SageEye',
       description: 'An ML-powered solution to detect phishing attempts across emails and websites with high accuracy.',
-      image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: SageEyeImg,
       technologies: ['Python', 'NLP', 'React', 'Flask'],
       status: 'upcoming',
-      details: 'SageEye is a comprehensive anti-phishing platform that utilizes advanced machine learning and natural language processing techniques to identify sophisticated phishing attempts. The solution analyzes emails, websites, and other digital communications to detect social engineering attempts and protect users from credential theft and malware distribution.',
+      details: 'SageEye is a comprehensive anti-phishing platform that utilizes advanced machine learning and natural language processing techniques.',
       features: [
-        'NLP-based analysis of email content and metadata',
-        'Visual similarity comparison for brand impersonation',
-        'URL analysis and website content inspection',
-        'Browser extension for real-time website assessment',
-        'Email filtering integration with popular email platforms',
-        'Continuous learning from new phishing techniques'
+        'Email analysis',
+        'Website scanning',
+        'Threat detection',
+        'Real-time alerts'
       ]
-    },
+    }
   ];
 
-  const displayedProjects = showAll ? projects : projects.slice(0, 3);
+  const displayedProjects = showAll ? projects : projects.slice(0, 4);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -113,9 +110,38 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ showAll }) => {
     },
   };
 
+  // Custom layout: 3 in first row, 4th centered in second row
+  let gridItems;
+  if (displayedProjects.length === 4) {
+    gridItems = [
+      // First row
+      <motion.div key={displayedProjects[0].id} variants={itemVariants}>
+        <ProjectCard project={displayedProjects[0]} />
+      </motion.div>,
+      <motion.div key={displayedProjects[1].id} variants={itemVariants}>
+        <ProjectCard project={displayedProjects[1]} />
+      </motion.div>,
+      <motion.div key={displayedProjects[2].id} variants={itemVariants}>
+        <ProjectCard project={displayedProjects[2]} />
+      </motion.div>,
+      // Second row: empty, project, empty
+      <div key="empty-left" className="hidden md:block" />,
+      <motion.div key={displayedProjects[3].id} variants={itemVariants}>
+        <ProjectCard project={displayedProjects[3]} />
+      </motion.div>,
+      <div key="empty-right" className="hidden md:block" />,
+    ];
+  } else {
+    gridItems = displayedProjects.map((project) => (
+      <motion.div key={project.id} variants={itemVariants}>
+        <ProjectCard project={project} />
+      </motion.div>
+    ));
+  }
+
   return (
-    <section className="py-16 md:py-24 bg-gray-50 dark:bg-dark-800">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-20 md:py-28 bg-gray-50 dark:bg-dark-800">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
         <SectionTitle number="03" title={showAll ? "All Projects" : "Featured Projects"} />
         
         <motion.div
@@ -123,13 +149,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ showAll }) => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mt-8"
         >
-          {displayedProjects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
-              <ProjectCard project={project} />
-            </motion.div>
-          ))}
+          {gridItems}
         </motion.div>
         
         {!showAll && (
