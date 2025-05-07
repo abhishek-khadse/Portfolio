@@ -8,6 +8,7 @@ import SkillsSection from '../components/about/SkillsSection';
 import MyPic from '../../Assets/My pic.png';
 
 const About: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
