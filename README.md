@@ -20,7 +20,7 @@ This project is a personal portfolio website built with React and TypeScript. It
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/abhishek-khadse/Portfolio.git
    cd portfolio
    ```
 2. Install dependencies:

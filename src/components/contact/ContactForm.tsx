@@ -24,19 +24,30 @@ const ContactForm: React.FC = () => {
     setError('');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      const res = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      let data;
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        data = { message: await res.text() };
+      }
+      if (!res.ok) {
+        throw new Error(data.message || 'Something went wrong.');
+      }
       // Reset form and show success message
       setFormData({ name: '', email: '', subject: '', message: '' });
       setIsSubmitted(true);
-      
       // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    } catch (err) {
-      setError('Something went wrong. Please try again later.');
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }

@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
     "@vercel/analytics": "^1.5.0",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
@@ -19,6 +20,7 @@
     "lucide-react": "^0.344.0",
     "next": "^15.3.2",
     "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.3",
     "openai": "^4.97.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -27,6 +29,7 @@
     "react-particles": "^2.12.2",
     "react-router-dom": "^6.22.1",
     "react-type-animation": "^3.2.0",
+    "resend": "^4.5.1",
     "tsparticles": "^2.12.0"
   },
   "devDependencies": {
@@ -50,5 +53,18 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.3.0",
     "vite": "^5.4.2"
-  }
+  },
+  "description": "This project is a personal portfolio website built with React and TypeScript. It showcases projects, skills, and personal information in a modern, responsive design.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek-khadse/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhishek-khadse/Portfolio/issues"
+  },
+  "homepage": "https://github.com/abhishek-khadse/Portfolio#readme"
 }
