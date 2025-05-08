@@ -6,7 +6,7 @@ import SectionTitle from '../components/common/SectionTitle';
 
 const Resume: React.FC = () => {
   // Placeholder URL for demonstration - would be replaced with actual resume PDF URL
-  const resumeUrl = "https://example.com/resume.pdf";
+  const resumeUrl = "https://drive.google.com/file/d/1fJh_r6wwUG0M0PKk9E4oKU_eLCUAYLCn/view?usp=sharing";
 
   return (
     <PageTransition>
@@ -22,10 +22,10 @@ const Resume: React.FC = () => {
                 <p className="text-lg text-blue-200 dark:text-gray-300">Cybersecurity Researcher</p>
               </div>
               <div className="flex gap-2 mt-4 md:mt-0">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-800 hover:bg-accent-500 rounded-full transition-colors">
+                <a href="https://www.linkedin.com/in/abhishek-khadse45/" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-800 hover:bg-accent-500 rounded-full transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-800 hover:bg-accent-500 rounded-full transition-colors">
+                <a href="https://github.com/abhishek-khadse" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-800 hover:bg-accent-500 rounded-full transition-colors">
                   <Github className="w-5 h-5" />
                 </a>
               </div>

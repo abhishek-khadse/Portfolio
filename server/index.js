@@ -6,7 +6,7 @@ const { Resend } = require('resend');
 const app = express();
 const PORT = 5000;
 
-const resend = new Resend('re_EY5FUfLb_N12WyARyGyjSSCBYaDRBeAQ9');
+const resend = new Resend('re_exwyefYB_JtvPr9MoYaBT8p6bztZfjLfX');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,8 +19,8 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     const resendResponse = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: 'abhishekkhadse982@gmail.com',
+      from: 'onboarding@resend.dev',
+      to: 'woosungjin837@gmail.com',
       subject: `Contact Form: ${subject}`,
       reply_to: email,
       html: `

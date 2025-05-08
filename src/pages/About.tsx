@@ -6,6 +6,8 @@ import PageTransition from '../components/common/PageTransition';
 import SectionTitle from '../components/common/SectionTitle';
 import SkillsSection from '../components/about/SkillsSection';
 import MyPic from '../../Assets/My pic.png';
+import { Link } from 'react-router-dom';
+import VibesSection from '../components/about/VibesSection';
 
 const About: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -162,9 +164,9 @@ const About: React.FC = () => {
                   </li>
                 </ul>
                 
-                <a href="#contact" className="block mt-6 text-center py-2.5 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium rounded-md shadow-sm transition-all hover:shadow-md">
+                <Link to="/contact" className="block mt-6 text-center py-2.5 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium rounded-md shadow-sm transition-all hover:shadow-md">
                   🤝 Let's Collaborate
-                </a>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -172,6 +174,7 @@ const About: React.FC = () => {
       </section>
       
       <SkillsSection />
+      <VibesSection />
     </PageTransition>
   );
 };
